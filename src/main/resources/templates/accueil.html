@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+
+    <title>Accueil</title>
+
+</head>
+
+<body>
+
+    <!-- ===================================================== -->
+    <!-- CONTENU DE LA PAGE D'ACCUEIL -->
+    <!-- ===================================================== -->
+
+    <div layout:fragment="content1">
+
+        <!-- En-tête -->
+        <div class="container-fluid px-4 py-4">
+
+            <div class="row align-items-center mb-4 app-page-header">
+
+                <div class="col-md-8">
+
+                    <h2 class="fw-bold mb-1">
+                        Bienvenue sur
+                        <span class="text-info">Daara-App</span>
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Gérez facilement les maîtres, les talibés,
+                        les classes et leurs progressions.
+                    </p>
+
+                </div>
+
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+
+                    <span class="badge bg-dark px-3 py-2">
+                        <i class="bi bi-speedometer2 me-1"></i>
+                        Tableau de bord
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- STATISTIQUES -->
+            <!-- ================================================= -->
+
+            <div class="row g-4 mb-4">
+
+
+                <!-- Maîtres -->
+                <div class="col-xl-3 col-md-6">
+
+                    <div class="card border-0 app-stat-card h-100">
+
+                        <div class="card-body">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-center">
+
+                                <div>
+
+                                    <p class="text-muted mb-1">
+                                        Maîtres
+                                    </p>
+
+                                    <h3 class="fw-bold mb-0" th:text="${nombreMaitres ?: 0}">
+                                        0
+                                    </h3>
+
+                                </div>
+
+                                <div class="app-icon-circle">
+                                    <i class="bi bi-person-badge"></i>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer bg-transparent border-0">
+
+                            <a th:href="@{/listMaitre}" class="text-decoration-none">
+
+                                Voir les maîtres <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Talibés -->
+                <div class="col-xl-3 col-md-6">
+
+                    <div class="card border-0 app-stat-card h-100">
+
+                        <div class="card-body">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-center">
+
+                                <div>
+
+                                    <p class="text-muted mb-1">
+                                        Talibés
+                                    </p>
+
+                                    <h3 class="fw-bold mb-0" th:text="${nombreTalibes ?: 0}">
+                                        0
+                                    </h3>
+
+                                </div>
+
+                                <div class="app-icon-circle accent">
+                                    <i class="bi bi-people"></i>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer bg-transparent border-0">
+
+                            <a th:href="@{/listTalibe}" class="text-decoration-none">
+
+                                Voir les talibés <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Classes -->
+                <div class="col-xl-3 col-md-6">
+
+                    <div class="card border-0 app-stat-card h-100">
+
+                        <div class="card-body">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-center">
+
+                                <div>
+
+                                    <p class="text-muted mb-1">
+                                        Classes
+                                    </p>
+
+                                    <h3 class="fw-bold mb-0" th:text="${nombreClasses ?: 0}">
+                                        0
+                                    </h3>
+
+                                </div>
+
+                                <div class="app-icon-circle">
+                                    <i class="bi bi-easel"></i>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer bg-transparent border-0">
+
+                            <a th:href="@{/listClasse}" class="text-decoration-none">
+
+                                Voir les classes <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Progressions -->
+                <div class="col-xl-3 col-md-6">
+
+                    <div class="card border-0 app-stat-card h-100">
+
+                        <div class="card-body">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-center">
+
+                                <div>
+
+                                    <p class="text-muted mb-1">
+                                        Progressions
+                                    </p>
+
+                                    <h3 class="fw-bold mb-0" th:text="${nombreProgressions ?: 0}">
+                                        0
+                                    </h3>
+
+                                </div>
+
+                                <div class="app-icon-circle accent">
+                                    <i class="bi bi-graph-up-arrow"></i>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer bg-transparent border-0">
+
+                            <a th:href="@{/listProgression}" class="text-decoration-none">
+
+                                Voir les progressions <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- ACCÈS RAPIDE -->
+            <!-- ================================================= -->
+
+            <div class="card border-0">
+
+                <div class="card-header app-header-neutral">
+
+                    <h5 class="mb-0">
+                        <i class="bi bi-lightning-charge me-2"></i>
+                        Accès rapide
+                    </h5>
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="row g-3">
+
+
+                        <!-- Gestion Maîtres -->
+                        <div class="col-md-6 col-lg-3">
+
+                            <a th:href="@{/listMaitre}" class="text-decoration-none">
+
+                                <div class="app-quicklink p-4 text-center h-100">
+
+                                    <div class="app-quicklink-icon mb-2">
+                                        <i class="bi bi-person-badge"></i>
+                                    </div>
+
+                                    <h5 class="text-dark">
+                                        Maîtres
+                                    </h5>
+
+                                    <p class="text-muted small mb-0">
+                                        Gérer les maîtres du Daara
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+
+                        <!-- Gestion Talibés -->
+                        <div class="col-md-6 col-lg-3">
+
+                            <a th:href="@{/listTalibe}" class="text-decoration-none">
+
+                                <div class="app-quicklink p-4 text-center h-100">
+
+                                    <div class="app-quicklink-icon mb-2">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+
+                                    <h5 class="text-dark">
+                                        Talibés
+                                    </h5>
+
+                                    <p class="text-muted small mb-0">
+                                        Gérer les talibés
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+
+                        <!-- Gestion Classes -->
+                        <div class="col-md-6 col-lg-3">
+
+                            <a th:href="@{/listClasse}" class="text-decoration-none">
+
+                                <div class="app-quicklink p-4 text-center h-100">
+
+                                    <div class="app-quicklink-icon mb-2">
+                                        <i class="bi bi-easel"></i>
+                                    </div>
+
+                                    <h5 class="text-dark">
+                                        Classes
+                                    </h5>
+
+                                    <p class="text-muted small mb-0">
+                                        Organiser les classes
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+
+                        <!-- Progressions -->
+                        <div class="col-md-6 col-lg-3">
+
+                            <a th:href="@{/listProgression}" class="text-decoration-none">
+
+                                <div class="app-quicklink p-4 text-center h-100">
+
+                                    <div class="app-quicklink-icon mb-2">
+                                        <i class="bi bi-graph-up-arrow"></i>
+                                    </div>
+
+                                    <h5 class="text-dark">
+                                        Progressions
+                                    </h5>
+
+                                    <p class="text-muted small mb-0">
+                                        Suivre les progressions
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- MESSAGE DE BIENVENUE -->
+            <!-- ================================================= -->
+
+            <div class="alert alert-info mt-4 shadow-sm">
+
+                <div class="d-flex align-items-center">
+
+                    <div class="fs-4 me-3">
+                        <i class="bi bi-info-circle"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Daara-App
+                        </strong>
+
+                        <div class="small">
+                            Utilisez le menu <strong>Gestion</strong>
+                            dans la barre de navigation pour accéder
+                            aux différents modules de l'application.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+/* =========================================================
+   DAARA-APP — DESIGN SYSTEM
+   Variables + styles partagés. Utilisé sur toutes les pages
+   via template.html. Ne contient aucune logique métier.
+   ========================================================= */
+
+:root {
+  /* Couleurs principales */
+  --daara-primary: #101828;       /* bleu nuit — navbar, footer, headers neutres */
+  --daara-primary-soft: #1e293b;  /* variante plus claire pour hover/dégradés légers */
+  --daara-accent: #0dcaf0;        /* cyan — cohérent avec "Daara" déjà en text-info */
+  --daara-accent-dark: #0aa8c2;   /* cyan plus soutenu pour hover/texte sur fond clair */
+
+  /* États */
+  --daara-success: #198754;
+  --daara-warning: #ffb020;
+  --daara-danger: #dc3545;
+
+  /* Neutres */
+  --daara-bg: #f5f7fa;
+  --daara-surface: #ffffff;
+  --daara-border: #e2e8f0;
+  --daara-text: #1f2937;
+  --daara-text-muted: #64748b;
+
+  /* Rayons / ombres cohérents sur toute l'app */
+  --daara-radius: 0.6rem;
+  --daara-radius-sm: 0.4rem;
+  --daara-shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --daara-shadow-hover: 0 4px 12px rgba(16, 24, 40, 0.1);
+}
+
+body {
+  background-color: var(--daara-bg);
+  color: var(--daara-text);
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar .navbar-brand {
+  letter-spacing: 0.2px;
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.navbar .nav-link.active {
+  color: var(--daara-accent) !important;
+}
+
+.navbar .nav-link:hover {
+  color: var(--daara-accent) !important;
+}
+
+/* =========================================================
+   EN-TÊTE DE PAGE (titre + description, pages de gestion)
+   ========================================================= */
+
+.app-page-header h2,
+.app-page-header h4 {
+  color: var(--daara-text);
+}
+
+.app-page-header .text-muted {
+  color: var(--daara-text-muted) !important;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+  border: 1px solid var(--daara-border);
+  border-radius: var(--daara-radius);
+  box-shadow: var(--daara-shadow);
+}
+
+.card-header.app-header-neutral {
+  background-color: var(--daara-surface);
+  border-bottom: 1px solid var(--daara-border);
+  color: var(--daara-text);
+}
+
+.card-header.app-header-neutral h5,
+.card-header.app-header-neutral h4 {
+  font-weight: 600;
+}
+
+/* Cards statistiques du dashboard */
+.app-stat-card {
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.app-stat-card:hover {
+  box-shadow: var(--daara-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.app-icon-circle {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--daara-primary);
+  color: #fff;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.app-icon-circle.accent {
+  background-color: var(--daara-accent);
+}
+
+/* Cartes "Accès rapide" */
+.app-quicklink {
+  border: 1px solid var(--daara-border);
+  border-radius: var(--daara-radius);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.app-quicklink:hover {
+  box-shadow: var(--daara-shadow-hover);
+  border-color: var(--daara-accent);
+  transform: translateY(-2px);
+}
+
+.app-quicklink .app-quicklink-icon {
+  font-size: 1.75rem;
+  color: var(--daara-accent-dark);
+}
+
+/* =========================================================
+   RECHERCHE (input-group)
+   ========================================================= */
+
+.app-search-bar .form-control:focus,
+.app-search-bar .btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 202, 240, 0.25);
+}
+
+/* =========================================================
+   TABLEAUX
+   ========================================================= */
+
+.table > thead {
+  border-bottom: 2px solid var(--daara-border);
+}
+
+.table > thead th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--daara-text-muted);
+  font-weight: 600;
+}
+
+.app-table-actions .btn {
+  --bs-btn-padding-x: 0.5rem;
+  --bs-btn-padding-y: 0.3rem;
+}
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.pagination .page-link {
+  color: var(--daara-text);
+  border-color: var(--daara-border);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--daara-primary);
+  border-color: var(--daara-primary);
+}
+
+.pagination .page-link:hover {
+  color: var(--daara-accent-dark);
+}
+
+/* =========================================================
+   FORMULAIRES
+   ========================================================= */
+
+.app-form-card .card-header {
+  background-color: var(--daara-primary);
+}
+
+.form-label.required::after {
+  content: " *";
+  color: var(--daara-danger);
+}
+
+.invalid-feedback.d-block {
+  display: block;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+  background-color: var(--daara-primary) !important;
+}
