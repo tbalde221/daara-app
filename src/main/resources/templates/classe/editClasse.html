@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Classes</title>
+
+</head>
+
+<body>
+    <div layout:fragment="content1">
+        <div class="container mt-5">
+
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+
+                    <div class="card shadow-sm border-0 app-form-card">
+
+                        <!-- En-tête -->
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <h4 class="mb-0">
+                                <i class="bi bi-pencil-square me-2"></i>
+                                Editer une classe
+                            </h4>
+                        </div>
+
+                        <!-- Formulaire -->
+                        <div class="card-body p-4">
+
+                            <form th:action="@{/saveClasse(page=${currentPage}, keyword=${keyword})}" method="post">
+
+                                <!-- Code (informatif, non éditable) -->
+                                <div class="mb-3">
+                                    <span class="badge bg-light text-dark border">
+                                        Code #<span th:text="${classe.codeClasse}"></span>
+                                    </span>
+
+                                    <input type="hidden" id="codeClasse" name="codeClasse"
+                                        th:value="${classe.codeClasse}">
+                                </div>
+
+                                <!-- Libelle -->
+                                <div class="mb-3">
+                                    <label for="libelle" class="form-label fw-semibold required">
+                                        Libellé
+                                    </label>
+
+                                    <input type="text" id="libelle" name="libelle" class="form-control"
+                                        placeholder="Entrez le libellé" th:value="${classe.libelle}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${classe.libelle}"></span>
+                                </div>
+
+                                <!-- Niveau -->
+                                <div class="mb-3">
+                                    <label for="niveau" class="form-label fw-semibold required">
+                                        Niveau
+                                    </label>
+
+                                    <select id="niveau" name="niveau" class="form-select">
+                                        <option value="DEBUTANT"
+                                            th:selected="${classe.niveau != null and classe.niveau.name() == 'DEBUTANT'}">
+                                            Débutant
+                                        </option>
+                                        <option value="INTERMEDIAIRE"
+                                            th:selected="${classe.niveau != null and classe.niveau.name() == 'INTERMEDIAIRE'}">
+                                            Intermédiaire
+                                        </option>
+                                        <option value="AVANCE"
+                                            th:selected="${classe.niveau != null and classe.niveau.name() == 'AVANCE'}">
+                                            Avancé
+                                        </option>
+                                    </select>
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${classe.niveau}"></span>
+                                </div>
+
+                                <!-- Maitre -->
+                                <div class="mb-4">
+                                    <label for="idMaitre" class="form-label fw-semibold required">
+                                        Maître
+                                    </label>
+
+                                    <select id="idMaitre" name="idMaitre" class="form-select">
+                                        <option th:each="m : ${listMaitre}" th:value="${m.idMaitre}"
+                                            th:text="${m.prenom + ' ' + m.nom}"
+                                            th:selected="${classe.maitre != null and classe.maitre.idMaitre == m.idMaitre}">
+                                        </option>
+                                    </select>
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${classe.maitre}"></span>
+                                </div>
+
+                                <!-- Boutons -->
+                                <div class="d-flex justify-content-between">
+
+                                    <a th:href="@{/listClasse}" class="btn btn-outline-secondary">
+                                        <i class="bi bi-x-circle me-1"></i>
+                                        Annuler
+                                    </a>
+
+                                    <button type="submit" class="btn btn-primary px-4">
+                                        <i class="bi bi-save me-1"></i>
+                                        Enregistrer
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>

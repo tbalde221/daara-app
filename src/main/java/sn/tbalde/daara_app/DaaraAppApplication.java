@@ -8,7 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import sn.tbalde.daara_app.entities.Classe;
 import sn.tbalde.daara_app.entities.Maitre;
+import sn.tbalde.daara_app.enums.Niveau;
+import sn.tbalde.daara_app.repositories.ClasseRepository;
 import sn.tbalde.daara_app.repositories.MaitreRepository;
 
 @SpringBootApplication
@@ -19,7 +22,7 @@ public class DaaraAppApplication {
 	}
 
 	@Bean
-	public CommandLineRunner start(MaitreRepository maitreRepository) {
+	public CommandLineRunner start(MaitreRepository maitreRepository, ClasseRepository classeRepository) {
 
 		return args -> {
 
@@ -127,121 +130,85 @@ public class DaaraAppApplication {
 					.idMaitre(UUID.randomUUID().toString())
 					.telephone("714567890")
 					.build();
-
-			Maitre m16 = Maitre.builder()
-					.nom("LO")
-					.prenom("Papa")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("725678901")
+			Classe c1 = Classe.builder()
+					.codeClasse("CL001")
+					.libelle("Classe Coranique 1")
+					.niveau(Niveau.DEBUTANT)
+					.maitre(m1)
 					.build();
 
-			Maitre m17 = Maitre.builder()
-					.nom("DIOUF")
-					.prenom("Moussa")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("736789012")
+			Classe c2 = Classe.builder()
+					.codeClasse("CL002")
+					.libelle("Classe Coranique 2")
+					.niveau(Niveau.DEBUTANT)
+					.maitre(m2)
 					.build();
 
-			Maitre m18 = Maitre.builder()
-					.nom("MBAYE")
-					.prenom("Alioune")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("747890123")
+			Classe c3 = Classe.builder()
+					.codeClasse("CL003")
+					.libelle("Classe Coranique 3")
+					.niveau(Niveau.DEBUTANT)
+					.maitre(m3)
 					.build();
 
-			Maitre m19 = Maitre.builder()
-					.nom("FAYE")
-					.prenom("Cheikh Ahmadou")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("758901234")
+			Classe c4 = Classe.builder()
+					.codeClasse("CL004")
+					.libelle("Classe Coranique 4")
+					.niveau(Niveau.INTERMEDIAIRE)
+					.maitre(m4)
 					.build();
 
-			Maitre m20 = Maitre.builder()
-					.nom("CISSE")
-					.prenom("Abdoul Aziz")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("769012345")
+			Classe c5 = Classe.builder()
+					.codeClasse("CL005")
+					.libelle("Classe Coranique 5")
+					.niveau(Niveau.INTERMEDIAIRE)
+					.maitre(m5)
 					.build();
 
-			Maitre m21 = Maitre.builder()
-					.nom("GNINGUE")
-					.prenom("Mamadou")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("770123456")
+			Classe c6 = Classe.builder()
+					.codeClasse("CL006")
+					.libelle("Classe Coranique 6")
+					.niveau(Niveau.INTERMEDIAIRE)
+					.maitre(m6)
 					.build();
 
-			Maitre m22 = Maitre.builder()
-					.nom("WANE")
-					.prenom("Abdou")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("781234890")
+			Classe c7 = Classe.builder()
+					.codeClasse("CL007")
+					.libelle("Classe Coranique 7")
+					.niveau(Niveau.INTERMEDIAIRE)
+					.maitre(m7)
 					.build();
 
-			Maitre m23 = Maitre.builder()
-					.nom("DIAGNE")
-					.prenom("Saliou")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("792345901")
+			Classe c8 = Classe.builder()
+					.codeClasse("CL008")
+					.libelle("Classe Coranique 8")
+					.niveau(Niveau.AVANCE)
+					.maitre(m8)
 					.build();
 
-			Maitre m24 = Maitre.builder()
-					.nom("NIANG")
-					.prenom("Babacar")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("703456890")
+			Classe c9 = Classe.builder()
+					.codeClasse("CL009")
+					.libelle("Classe Coranique 9")
+					.niveau(Niveau.AVANCE)
+					.maitre(m9)
 					.build();
 
-			Maitre m25 = Maitre.builder()
-					.nom("KONATE")
-					.prenom("Moussa")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("714567901")
+			Classe c10 = Classe.builder()
+					.codeClasse("CL010")
+					.libelle("Classe Coranique 10")
+					.niveau(Niveau.AVANCE)
+					.maitre(m10)
 					.build();
-
-			Maitre m26 = Maitre.builder()
-					.nom("TRAORE")
-					.prenom("Ibrahima")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("725678012")
-					.build();
-
-			Maitre m27 = Maitre.builder()
-					.nom("DANSOKHO")
-					.prenom("Oumar")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("736789123")
-					.build();
-
-			Maitre m28 = Maitre.builder()
-					.nom("KEBE")
-					.prenom("Moustapha")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("747890234")
-					.build();
-
-			Maitre m29 = Maitre.builder()
-					.nom("SYLLA")
-					.prenom("Abdoulaye")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("758901345")
-					.build();
-
-			Maitre m30 = Maitre.builder()
-					.nom("DIA")
-					.prenom("Amadou")
-					.idMaitre(UUID.randomUUID().toString())
-					.telephone("769012456")
-					.build();
-
 			maitreRepository.saveAll(List.of(
 					m1, m2, m3, m4, m5,
 					m6, m7, m8, m9, m10,
-					m11, m12, m13, m14, m15,
-					m16, m17, m18, m19, m20,
-					m21, m22, m23, m24, m25,
-					m26, m27, m28, m29, m30));
+					m11, m12, m13, m14, m15));
+			classeRepository.saveAll(List.of(
+					c1, c2, c3, c4, c5,
+					c6, c7, c8, c9, c10));
 
 		};
+
 	}
 
 }
