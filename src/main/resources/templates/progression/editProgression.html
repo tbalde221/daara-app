@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Progressions</title>
+
+</head>
+
+<body>
+    <div layout:fragment="content1">
+        <div class="container mt-5">
+
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+
+                    <div class="card shadow-sm border-0 app-form-card">
+
+                        <!-- En-tête -->
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <h4 class="mb-0">
+                                <i class="bi bi-person-plus me-2"></i>
+                                Ajouter une Progression
+                            </h4>
+                        </div>
+
+                        <!-- Formulaire -->
+                        <div class="card-body p-4">
+
+                            <form th:action="@{/saveProgression}" method="post">
+
+                                <!-- ID (technique, non éditable) -->
+                                <input type="hidden" id="idProgression" name="idProgression"
+                                    th:value="${progression.idProgression}">
+
+                                <!-- Prénom -->
+                                <div class="mb-3">
+                                    <label for="sourate" class="form-label fw-semibold required">
+                                        Sourate
+                                    </label>
+
+                                    <input type="text" id="sourate" name="sourate" class="form-control"
+                                        placeholder="Entrez la sourate" th:value="${progression.sourate}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${progression.sourate}"></span>
+                                </div>
+
+                                <!-- Nom -->
+                                <div class="mb-3">
+                                    <label for="nombreVersets" class="form-label fw-semibold required">
+                                        Nombre Versets
+                                    </label>
+
+                                    <input type="text" id="nombreVersets" name="nombreVersets" class="form-control"
+                                        placeholder="Entrez le nombre de versets"
+                                        th:value="${progression.nombreVersets}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${progression.nombreVersets}"></span>
+                                </div>
+
+                                <!-- Téléphone -->
+                                <div class="mb-4">
+                                    <label for="dateEvaluation" class="form-label fw-semibold">
+                                        Date d'évaluation
+                                    </label>
+
+                                    <input type="date" id="dateEvaluation" name="dateEvaluation" class="form-control"
+                                        placeholder="Entrez la date d'évaluation"
+                                        th:value="${#dates.format(progression.dateEvaluation, 'yyyy-MM-dd')}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${progression.dateEvaluation}"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apreciation" class="form-label fw-semibold required">
+                                        Apreciation...
+                                    </label>
+
+                                    <input type="text" id="apreciation" name="apreciation" class="form-control"
+                                        placeholder="Entrez l'apreciation du maître"
+                                        th:value="${progression.apreciation}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${progression.apreciation}"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="idTalibe" class="form-label fw-semibold required">
+                                        Talibé
+                                    </label>
+
+                                    <select id="idTalibe" name="idTalibe" class="form-select">
+                                        <option th:each="m : ${listTalibe}" th:value="${m.idTalibe}"
+                                            th:text="${m.prenom + ' ' + m.nom}"
+                                            th:selected="${progression.talibe != null and progression.talibe.idTalibe == m.idTalibe}">
+                                        </option>
+                                    </select>
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${progression.talibe}"></span>
+                                </div>
+
+                                <!-- Boutons -->
+                                <div class="d-flex justify-content-between">
+
+                                    <a th:href="@{/listProgression}" class="btn btn-outline-secondary">
+                                        <i class="bi bi-x-circle me-1"></i>
+                                        Annuler
+                                    </a>
+
+                                    <button type="submit" class="btn btn-primary px-4">
+                                        <i class="bi bi-save me-1"></i>
+                                        Enregistrer
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>

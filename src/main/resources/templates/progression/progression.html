@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+
+    <title>Progressions</title>
+
+</head>
+
+<body>
+
+    <div layout:fragment="content1">
+
+        <div class="container-fluid p-4">
+
+            <!-- En-tête de page -->
+            <div class="app-page-header mb-3">
+                <h4 class="fw-bold mb-1">
+                    <i class="bi bi-person-badge me-2 text-info"></i>
+                    Progressions
+                </h4>
+                <p class="text-muted mb-0">
+                    Consultez, recherchez et gérez les progressions des talibés du Daara.
+                </p>
+            </div>
+
+            <div class="card border-0">
+
+                <div class="card-header app-header-neutral d-flex
+                            justify-content-between align-items-center
+                            flex-wrap gap-3">
+
+                    <!-- Recherche -->
+                    <form th:action="@{/listClasse}" method="get" class="app-search-bar flex-grow-1"
+                        style="max-width: 360px;">
+
+                        <div class="input-group">
+
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-search"></i>
+                            </span>
+
+                            <input id="keyword" type="text" name="keyword" th:value="${keyword}" class="form-control"
+                                placeholder="Rechercher une classe...">
+
+                            <button type="submit" class="btn btn-outline-secondary">
+                                Rechercher
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <!-- Nouveau maître -->
+                    <a th:href="@{/formProgression}" class="btn btn-primary">
+                        <i class="bi bi-plus-circle me-1"></i>
+                        Nouveau Progression
+                    </a>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-striped
+                                      table-hover align-middle">
+
+                            <thead class="table-light">
+
+                                <tr>
+
+                                    <th>ID</th>
+                                    <th>Sourate</th>
+                                    <th>Nombre de Verset(s)</th>
+                                    <th>Date d'évaluation</th>
+                                    <th>Apréciation</th>
+
+                                    <th class="text-end">Actions</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr th:each="p,status : ${listProgression}">
+
+                                    <td th:text="${currentPage * 6 + status.index + 1}"></td>
+
+                                    <td th:text="${p.sourate}">
+                                    </td>
+
+                                    <td th:text="${p.nombreVersets}"></td>
+                                    <td th:text="${p.dateEvaluation}"></td>
+                                    <td th:text="${p.apreciation}"></td>
+
+
+
+
+                                    <td class="text-end app-table-actions">
+
+                                        <a th:href="@{/editProgression(id=${p.idProgression}, keyword=${keyword}, page=${currentPage})}"
+                                            class="btn btn-sm btn-outline-primary" aria-label="Modifier le maître"
+                                            title="Modifier">
+
+                                            <i class="bi bi-pencil"></i>
+
+                                        </a>
+
+                                        <a th:href="@{/deleteClasse(id=${p.idProgression},page=${currentPage},
+                                keyword=${keyword})}" class="btn btn-sm btn-outline-danger"
+                                            aria-label="Supprimer le maître" title="Supprimer"
+                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce maître ?')">
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <!-- Pagination + export CSV -->
+                    <div class="d-flex justify-content-between
+                                align-items-center flex-wrap gap-3 mt-3">
+
+                        <ul class="pagination mb-0">
+
+                            <li class="page-item" th:each="page,status : ${pages}">
+
+                                <a th:class="${status.index == currentPage
+                                ? 'page-link active'
+                                : 'page-link'}" th:text="${status.index + 1}" th:href="@{/listProgression(
+                                page=${status.index},
+                                keyword=${keyword}
+                            )}">
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                        <a th:href="@{/exportClasseCsv(keyword=${keyword})}" class="btn btn-success">
+                            <i class="bi bi-download me-1"></i>
+                            Télécharger la liste en CSV
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
