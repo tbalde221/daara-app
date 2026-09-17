@@ -1,5 +1,7 @@
 package sn.tbalde.daara_app.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,8 +17,10 @@ import sn.tbalde.daara_app.repositories.ProgressionRepository;
 import sn.tbalde.daara_app.repositories.TalibeRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @AllArgsConstructor
@@ -78,6 +82,53 @@ public class ProgressionController {
         model.addAttribute("currentPage", page);
         model.addAttribute("keyword", keyword);
         return "progression/editProgression";
+    }
+
+    @GetMapping("/deleteProgression")
+    public String deleteProgression(String id, @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "keyword", defaultValue = "") String keyword) {
+        progressionRepository.deleteById(id);
+        return "redirect:/listProgression?page=" + page + "&keyword=" + keyword;
+    }
+
+    @GetMapping("/exportProgressionCsv")
+    public void exportProgressionCsv(
+            @RequestParam(name = "keyword", defaultValue = "") String keyword,
+            HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        response.setCharacterEncoding("UTF-8");
+
+        response.setHeader(
+                "Content-Disposition",
+                "attachment; filename=progression.csv");
+
+        List<Progression> progressions;
+
+        if (keyword == null || keyword.isBlank()) {
+            progressions = progressionRepository.findAll();
+        } else {
+            progressions = progressionRepository.findBySourateContainsIgnoreCase(keyword);
+        }
+
+        PrintWriter writer = response.getWriter();
+
+        // Pour une meilleure compatibilité avec Excel
+        writer.write('\uFEFF');
+
+        writer.println("N°;Sourate;Nombre de versers;Apréciation;Date d'évaluation");
+
+        int compteur = 1;
+
+        for (Progression progression : progressions) {
+            writer.println(
+                    compteur++ + ";" +
+                            progression.getSourate() + ";" +
+                            progression.getNombreVersets() + ";" +
+                            progression.getApreciation() + ";" +
+                            progression.getDateEvaluation());
+        }
+
+        writer.flush();
     }
 
 }

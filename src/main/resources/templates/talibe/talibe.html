@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Progressions</title>
+    <title>Talibes</title>
 
 </head>
 
@@ -18,10 +18,10 @@
             <div class="app-page-header mb-3">
                 <h4 class="fw-bold mb-1">
                     <i class="bi bi-person-badge me-2 text-info"></i>
-                    Progressions
+                    Talibes
                 </h4>
                 <p class="text-muted mb-0">
-                    Consultez, recherchez et gérez les progressions des talibés du Daara.
+                    Consultez, recherchez et gérez les talibés du Daara.
                 </p>
             </div>
 
@@ -32,7 +32,7 @@
                             flex-wrap gap-3">
 
                     <!-- Recherche -->
-                    <form th:action="@{/listProgression}" method="get" class="app-search-bar flex-grow-1"
+                    <form th:action="@{/listTalibe}" method="get" class="app-search-bar flex-grow-1"
                         style="max-width: 360px;">
 
                         <div class="input-group">
@@ -53,9 +53,9 @@
                     </form>
 
                     <!-- Nouveau maître -->
-                    <a th:href="@{/formProgression}" class="btn btn-primary">
+                    <a th:href="@{/formTalibe}" class="btn btn-primary">
                         <i class="bi bi-plus-circle me-1"></i>
-                        Nouveau Progression
+                        Nouveau Talibé
                     </a>
 
                 </div>
@@ -72,10 +72,11 @@
                                 <tr>
 
                                     <th>ID</th>
-                                    <th>Sourate</th>
-                                    <th>Nombre de Verset(s)</th>
-                                    <th>Date d'évaluation</th>
-                                    <th>Apréciation</th>
+                                    <th>Prénom</th>
+                                    <th>Nom</th>
+                                    <th>Date de Naissance</th>
+                                    <th>Nom Tuteur</th>
+                                    <th>Téléphone Tuteur</th>
 
                                     <th class="text-end">Actions</th>
 
@@ -86,23 +87,24 @@
 
                             <tbody>
 
-                                <tr th:each="p,status : ${listProgression}">
+                                <tr th:each="p,status : ${listTalibe}">
 
                                     <td th:text="${currentPage * 6 + status.index + 1}"></td>
 
-                                    <td th:text="${p.sourate}">
+                                    <td th:text="${p.prenom}">
                                     </td>
 
-                                    <td th:text="${p.nombreVersets}"></td>
-                                    <td th:text="${p.dateEvaluation}"></td>
-                                    <td th:text="${p.apreciation}"></td>
+                                    <td th:text="${p.nom}"></td>
+                                    <td th:text="${#dates.format(p.dateNaissance, 'yyyy-MM-dd')}"></td>
+                                    <td th:text="${p.nomTuteur}"></td>
+                                    <td th:text="${p.telephoneTuteur}"></td>
 
 
 
 
                                     <td class="text-end app-table-actions">
 
-                                        <a th:href="@{/editProgression(id=${p.idProgression}, keyword=${keyword}, page=${currentPage})}"
+                                        <a th:href="@{/editTalibe(id=${p.idTalibe}, keyword=${keyword}, page=${currentPage})}"
                                             class="btn btn-sm btn-outline-primary" aria-label="Modifier le maître"
                                             title="Modifier">
 
@@ -110,7 +112,7 @@
 
                                         </a>
 
-                                        <a th:href="@{/deleteProgression(id=${p.idProgression},page=${currentPage},
+                                        <a th:href="@{/deleteTalibe(id=${p.idTalibe},page=${currentPage},
                                 keyword=${keyword})}" class="btn btn-sm btn-outline-danger"
                                             aria-label="Supprimer la progression" title="Supprimer"
                                             onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette progression ?')">
@@ -139,7 +141,7 @@
 
                                 <a th:class="${status.index == currentPage
                                 ? 'page-link active'
-                                : 'page-link'}" th:text="${status.index + 1}" th:href="@{/listProgression(
+                                : 'page-link'}" th:text="${status.index + 1}" th:href="@{/listTalibe(
                                 page=${status.index},
                                 keyword=${keyword}
                             )}">
@@ -149,7 +151,7 @@
 
                         </ul>
 
-                        <a th:href="@{/exportProgressionCsv(keyword=${keyword})}" class="btn btn-success">
+                        <a th:href="@{/exportTalibeCsv(keyword=${keyword})}" class="btn btn-success">
                             <i class="bi bi-download me-1"></i>
                             Télécharger la liste en CSV
                         </a>

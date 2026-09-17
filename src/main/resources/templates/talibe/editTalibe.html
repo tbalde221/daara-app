@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Talibés</title>
+
+</head>
+
+<body>
+    <div layout:fragment="content1">
+        <div class="container mt-5">
+
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+
+                    <div class="card shadow-sm border-0 app-form-card">
+
+                        <!-- En-tête -->
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <h4 class="mb-0">
+                                <i class="bi bi-person-plus me-2"></i>
+                                Editer un Talibé
+                            </h4>
+                        </div>
+
+                        <!-- Formulaire -->
+                        <div class="card-body p-4">
+
+                            <form th:action="@{/saveTalibe}" method="post">
+
+                                <!-- ID (technique, non éditable) -->
+                                <input type="hidden" id="idTalibe" name="idTalibe" th:value="${talibe.idTalibe}">
+
+                                <!-- Prénom -->
+                                <div class="mb-3">
+                                    <label for="nom" class="form-label fw-semibold required">
+                                        Nom
+                                    </label>
+
+                                    <input type="text" id="nom" name="nom" class="form-control"
+                                        placeholder="Entrez le nom" th:value="${talibe.nom}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${talibe.nom}"></span>
+                                </div>
+
+                                <!-- Nom -->
+                                <div class="mb-3">
+                                    <label for="prenom" class="form-label fw-semibold required">
+                                        Prénom
+                                    </label>
+
+                                    <input type="text" id="prenom" name="prenom" class="form-control"
+                                        placeholder="Entrez le prénom" th:value="${talibe.prenom}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${talibe.prenom}"></span>
+                                </div>
+
+                                <!-- Téléphone -->
+                                <div class="mb-4">
+                                    <label for="dateNaissance" class="form-label fw-semibold">
+                                        Date de Naissance
+                                    </label>
+
+                                    <input type="date" id="dateNaissance" name="dateNaissance" class="form-control"
+                                        placeholder="Entrez la date de Naissance"
+                                        th:value="${#dates.format(talibe.dateNaissance, 'yyyy-MM-dd')}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${talibe.dateNaissance}"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nomTuteur" class="form-label fw-semibold required">
+                                        Nom complet du Tuteur
+                                    </label>
+
+                                    <input type="text" id="nomTuteur" name="nomTuteur" class="form-control"
+                                        placeholder="Entrez le nom complet du tuteur" th:value="${talibe.nomTuteur}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${talibe.nomTuteur}"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telephoneTuteur" class="form-label fw-semibold required">
+                                        Téléphone du Tuteur
+                                    </label>
+
+                                    <input type="text" id="telephoneTuteur" name="telephoneTuteur" class="form-control"
+                                        placeholder="Entrez le numéro de téléphone du tuteur"
+                                        th:value="${talibe.telephoneTuteur}">
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${talibe.telephoneTuteur}"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="codeClasse" class="form-label fw-semibold required">
+                                        Classe
+                                    </label>
+
+                                    <select id="codeClasse" name="codeClasse" class="form-select">
+                                        <option th:each="m : ${listClasse}" th:value="${m.codeClasse}"
+                                            th:text="${m.libelle +' / '+m.niveau}">
+                                        </option>
+                                    </select>
+
+                                    <span class="text-danger small invalid-feedback d-block"
+                                        th:errors="${talibe.classe}"></span>
+                                </div>
+
+                                <!-- Boutons -->
+                                <div class="d-flex justify-content-between">
+
+                                    <a th:href="@{/listTalibe}" class="btn btn-outline-secondary">
+                                        <i class="bi bi-x-circle me-1"></i>
+                                        Annuler
+                                    </a>
+
+                                    <button type="submit" class="btn btn-primary px-4">
+                                        <i class="bi bi-save me-1"></i>
+                                        Editer
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>

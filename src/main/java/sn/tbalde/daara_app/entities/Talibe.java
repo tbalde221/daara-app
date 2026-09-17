@@ -2,6 +2,8 @@ package sn.tbalde.daara_app.entities;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -27,6 +29,7 @@ public class Talibe {
     @NotEmpty
     @Size(max = 50)
     private String nom;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
     @NotEmpty
     @Size(max = 100)
